@@ -32,6 +32,7 @@ C:\Users\User\AppData\Local\Android\Sdk\platform-tools;%ANDROID_HOME%/platform-t
 
 HZ >> on phone > appium settings and Unloock > Thought that install in first appium launch !?
 
+selen-appium doc http://appium.io/docs/en/about-appium/api/
 """
 
 

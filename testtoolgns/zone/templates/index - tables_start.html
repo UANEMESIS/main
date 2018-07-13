@@ -1,0 +1,47 @@
+{% load static %}
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap.min.css" />
+
+
+
+
+
+
+<table>
+<tr>
+<th>Action</th>
+</tr>
+  {% for ava in dota %}
+    {% cycle '' '<tr>' %}
+      <td>{{ava.action}}</td>
+    {% cycle '' '</tr>' %}
+  {% endfor %}
+</table>
+
+
+<table id="example" class="table table-striped table-bordered" style="width:100%">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Action</th>
+                <th>Result</th>
+                <th>Comment</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+				{% for ava in dota %}
+                <td>{{ ava.num_of_action }}</td>
+				
+				
+				{% cycle '' '' '<tr>' %}
+				<td>{{ava.action}}</td>
+				{% cycle  '</tr>' '' %}
+				{% endfor %}
+                <td>System Architect</td>
+                <td>Edinburgh</td>
+                <td>61</td>
+            </tr>
+    </table>

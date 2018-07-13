@@ -1,0 +1,11 @@
+
+
+<table>
+  {% for ava in dota %}
+    {% cycle '<tr>' '' '' '' %}
+      <td>{{ava.action}}</td>
+    {% cycle '' '' '' '</tr>' %}
+  {% endfor %}
+</table>
+
+

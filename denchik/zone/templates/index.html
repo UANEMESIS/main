@@ -1,0 +1,53 @@
+{% load static %}
+
+
+<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" />
+<link rel="stylesheet" href="{% static 'css/dataTables.bootstrap.min.css' %}" />
+
+<style>
+   .layer {
+    background: DarkGoldenRod; /* Цвет фона */
+    border: 2px solid black;  /* Параметры рамки */
+	padding-left: 87%;
+   }
+</style>
+
+<div class="layer">
+	<form action="/admin">
+		<input type="submit" value="Go to Admin panel" />
+	</form>
+</div>
+
+
+
+{% for item in listall %}
+	<h4>Id of checklist: {{ item.checklist_id }}</h4>
+	<h4>Name of checklist: {{ item.checklist_name }}</h4>
+{% endfor %}
+
+<table id="example" class="table table-striped table-bordered" style="width:100%">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Action</th>
+                <th>Result</th>
+                <th>Comment</th>
+				<th>Creator</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+				{% for item in actions %}
+				<tr>
+                <td>{{ item.action_id }}</td>
+				<td>{{ item.action }}</td>
+				<td>{{ item.result }}</td>
+                <td>{{ item.comment }}</td>
+				<td>{{ item.creator }}</td>
+				</tr> 
+				{% endfor %}
+
+            </tr>
+    </table>
+<button type="submit" name="do" value="save">Send report</button>
+

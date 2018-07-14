@@ -1,0 +1,31 @@
+{% load static %}
+
+
+<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" />
+<link rel="stylesheet" href="{% static 'css/dataTables.bootstrap.min.css' %}" />
+
+<table id="example" class="table table-striped table-bordered" style="width:100%">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Action</th>
+                <th>Result</th>
+                <th>Comment</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+				{% for ava in dota %}
+				<tr>
+                <td>{{ ava.num_of_action }}</td>
+				<td>{{ ava.action }}</td>
+				<td>{{ ava.result }}<li><button type="submit" name="do" value="save">Pass</button></li><li><button type="submit" name="do" value="save">Fail</button></li></td>
+                <td>{{ ava.comment }}</td>
+				<td>{{ ava.name_of_list }}</td>
+				</tr> 
+				{% endfor %}
+
+            </tr>
+    </table>
+
+	

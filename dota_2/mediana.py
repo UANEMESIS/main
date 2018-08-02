@@ -2,10 +2,13 @@ import requests
 from bs4 import BeautifulSoup
 import re
 import json
- 
-USER_ID = "300488588" # Идишка аккаунта
-WIN_HERO_RATE = {} 
+#from colorama import init
+#from colorama import Fore, Back, Style
 
+#init()
+USER_ID = "125138801" # Идишка аккаунта
+WIN_HERO_RATE = {} 
+MEDIANA_LIST_RESULT = []
 
 # Блок получения винрейта для каждого героя
 
@@ -30,7 +33,7 @@ def get_all_win_rates():
 
 	# Заполняем WIN_HERO_RATE в виде key (герой) value (винрейт героя)
 	for h, s in zip(top_30_heroes, hero_stats_only_percent):
-		WIN_HERO_RATE[h] = s
+		WIN_HERO_RATE[h] = float(s)
 
 get_all_win_rates()
 print(WIN_HERO_RATE)
@@ -75,43 +78,94 @@ def get_20_last_matches_ids():
 	for ids in rmm_20_ids_convert_json:
 		LAST_20_MATCHES.append(str(ids["match_id"]))
 
-#get_20_last_matches_ids()
+get_20_last_matches_ids()
 #print(LAST_20_MATCHES)
 
 #------------------------------------------------------------------------
 
+# вытянуть id героев
+
+def get_hero_ids():
+	RAW_HEROES_IDS = "https://raw.githubusercontent.com/UANEMESIS/main/master/dota_2/heroes.json"
+
+	raw_get_heroes_ids = requests.get(RAW_HEROES_IDS)
+	raw_get_heroes_conver_json = json.loads(raw_get_heroes_ids.text)
+
+	# Replace keys and values
+	list_of_keys = [itm for itm in raw_get_heroes_conver_json.keys()]
+	list_of_values = [vl for vl in raw_get_heroes_conver_json.values()]
+	FINAL_HERO_IDS = {v:k for v,k in zip(list_of_values, list_of_keys)}
+	return FINAL_HERO_IDS
+
+HERO_IDS = get_hero_ids()
+
+
+
+#print(HERO_IDS)
+
+#------------------------------------------------------------------------
 #Вытягиваем необходимую инфу по матчу 
 
-def details_of_matches():
-	matches_url_detailed = f"https://api.opendota.com/api/matches/4037097511"
+def details_of_matches(m_id):
+	MEDIANA_FOR_MATCH = None
+	WINNER = None
+	RESULT = None
+	OFFSET = None
+	matches_url_detailed = f"https://api.opendota.com/api/matches/{m_id}"
 	request_details_of_match = requests.get(matches_url_detailed)
 	details_of_match_convert_json = json.loads(request_details_of_match.text)
 
-	#print(details_of_match_convert_json["radiant_win"])
-	rhero_1 = details_of_match_convert_json["players"][0]["hero_id"]
-	rhero_2 = details_of_match_convert_json["players"][1]["hero_id"]
-	rhero_3 = details_of_match_convert_json["players"][2]["hero_id"]
-	rhero_4 = details_of_match_convert_json["players"][3]["hero_id"]
-	rhero_5 = details_of_match_convert_json["players"][4]["hero_id"]
+	win_result = details_of_match_convert_json["radiant_win"]
+	if win_result == True:
+		WINNER = "Radiant"
+	else:
+		WINNER = "Dire"
 
-	dhero_1 = details_of_match_convert_json["players"][5]["hero_id"]
-	dhero_2 = details_of_match_convert_json["players"][6]["hero_id"]
-	dhero_3 = details_of_match_convert_json["players"][7]["hero_id"]
-	dhero_4 = details_of_match_convert_json["players"][8]["hero_id"]
-	dhero_5 = details_of_match_convert_json["players"][9]["hero_id"]
+	rhero_1 = WIN_HERO_RATE[HERO_IDS[details_of_match_convert_json["players"][0]["hero_id"]]]
+	rhero_2 = WIN_HERO_RATE[HERO_IDS[details_of_match_convert_json["players"][1]["hero_id"]]]
+	rhero_3 = WIN_HERO_RATE[HERO_IDS[details_of_match_convert_json["players"][2]["hero_id"]]]
+	rhero_4 = WIN_HERO_RATE[HERO_IDS[details_of_match_convert_json["players"][3]["hero_id"]]]
+	rhero_5 = WIN_HERO_RATE[HERO_IDS[details_of_match_convert_json["players"][4]["hero_id"]]]
 
-	print(dhero_1, dhero_2, dhero_3, dhero_4, dhero_5)
+	dhero_1 = WIN_HERO_RATE[HERO_IDS[details_of_match_convert_json["players"][5]["hero_id"]]]
+	dhero_2 = WIN_HERO_RATE[HERO_IDS[details_of_match_convert_json["players"][6]["hero_id"]]]
+	dhero_3 = WIN_HERO_RATE[HERO_IDS[details_of_match_convert_json["players"][7]["hero_id"]]]
+	dhero_4 = WIN_HERO_RATE[HERO_IDS[details_of_match_convert_json["players"][8]["hero_id"]]]
+	dhero_5 = WIN_HERO_RATE[HERO_IDS[details_of_match_convert_json["players"][9]["hero_id"]]]
+
 	
-	#f = open('1', 'w')
-	#with open('1.txt', 'w') as f:
-		#write_data = f.write(str(z))
+	radiant_mediana = round((rhero_1 + rhero_2 + rhero_3 + rhero_4 + rhero_5)/5, 3)
+	dire_mediana = round((dhero_1 + dhero_2 + dhero_3 + dhero_4 + dhero_5)/5, 3)
+	
+	if radiant_mediana > dire_mediana and WINNER == "Radiant":
+		MEDIANA_FOR_MATCH = "Success!"
+		RESULT = f"Winner: {WINNER} Percent(Radiant|Dire): {radiant_mediana} | {dire_mediana} Mediana: {MEDIANA_FOR_MATCH}"
+	elif radiant_mediana > dire_mediana and WINNER == "Dire":
+		OFFSET = radiant_mediana - dire_mediana
+		MEDIANA_FOR_MATCH = "Failed!"
+		RESULT = f"Winner: {WINNER} Percent(Radiant|Dire): {radiant_mediana} | {dire_mediana} Mediana: {MEDIANA_FOR_MATCH} OFFSET: {OFFSET}"
+	elif radiant_mediana < dire_mediana and WINNER == "Radiant":
+		OFFSET = dire_mediana - radiant_mediana
+		MEDIANA_FOR_MATCH = "Failed!"
+		RESULT = f"Winner: {WINNER} Percent(Radiant|Dire): {radiant_mediana} | {dire_mediana} Mediana: {MEDIANA_FOR_MATCH} OFFSET: {OFFSET}"
+	elif radiant_mediana < dire_mediana and WINNER == "Dire":
+		MEDIANA_FOR_MATCH = "Success!"
+		RESULT = f"Winner: {WINNER} Percent(Radiant|Dire): {radiant_mediana} | {dire_mediana} Mediana: {MEDIANA_FOR_MATCH}"
+	else:
+		RESULT = "UNKNOWN ERROR!!!"
+	print(RESULT)
+	MEDIANA_LIST_RESULT.append(RESULT)
 
-details_of_matches()
 
-RAW_HEROES_IDS = "https://raw.githubusercontent.com/UANEMESIS/main/master/dota_2/heroes.json"
 
-raw_get = requests.get(RAW_HEROES_IDS)
-#r22 = json.loads(raw_get.text)
-print(raw_get.text)
-#print(r22["heroes"][0])
-#print(raw_get.text)
+
+#counter = 0
+
+#while counter < len(LAST_20_MATCHES):
+#	for i in LAST_20_MATCHES:
+#		details_of_matches(i)
+#		counter +=1
+
+#print(LAST_20_MATCHES)
+
+#print(MEDIANA_LIST_RESULT)

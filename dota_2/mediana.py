@@ -112,6 +112,6 @@ RAW_HEROES_IDS = "https://raw.githubusercontent.com/UANEMESIS/main/master/dota_2
 
 raw_get = requests.get(RAW_HEROES_IDS)
 r22 = json.loads(raw_get.text)
-
-print(r22["heroes"][0])
+print(r22)
+#print(r22["heroes"][0])
 #print(raw_get.text)

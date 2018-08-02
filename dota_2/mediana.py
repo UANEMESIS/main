@@ -36,7 +36,7 @@ def get_all_win_rates():
 		WIN_HERO_RATE[h] = float(s)
 
 get_all_win_rates()
-print(WIN_HERO_RATE)
+#print(WIN_HERO_RATE)
 
 #------------------------------------------------------------------------
 
@@ -159,13 +159,13 @@ def details_of_matches(m_id):
 
 
 
-#counter = 0
+counter = 0
 
-#while counter < len(LAST_20_MATCHES):
-#	for i in LAST_20_MATCHES:
-#		details_of_matches(i)
-#		counter +=1
+while counter < len(LAST_20_MATCHES):
+	for i in LAST_20_MATCHES:
+		details_of_matches(i)
+		counter +=1
 
 #print(LAST_20_MATCHES)
 
-#print(MEDIANA_LIST_RESULT)
+print(MEDIANA_LIST_RESULT)

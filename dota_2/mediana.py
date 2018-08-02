@@ -20,19 +20,20 @@ def get_all_win_rates():
 	text_filter_1 = soup.get_text().split("УСП")[1]
 	text_filter_2 = text_filter_1.split("Обновлено")[0].replace(" ", "")
 	text_filter_2_2 = text_filter_2.replace("Anti-Mage", "AntiMage")
-	text_filter_3 = re.findall("[a-zA-Z]+", text_filter_2_2)
+	text_filter_2_3 = text_filter_2_2.replace("Nature'sProphet", "NaturesProphet")
+	text_filter_3 = re.findall("[a-zA-Z]+", text_filter_2_3)
 	top_30_heroes = text_filter_3[0:118]
 
 
-	hero_stats = re.split("[a-zA-Z]+", text_filter_2_2)[1:118]
+	hero_stats = re.split("[a-zA-Z]+", text_filter_2_3)[1:118]
 	hero_stats_only_percent = [per.split("%")[0] for per in hero_stats]
 
 	# Заполняем WIN_HERO_RATE в виде key (герой) value (винрейт героя)
 	for h, s in zip(top_30_heroes, hero_stats_only_percent):
 		WIN_HERO_RATE[h] = s
 
-#get_all_win_rates()
-#print(WIN_HERO_RATE)
+get_all_win_rates()
+print(WIN_HERO_RATE)
 
 #------------------------------------------------------------------------
 
@@ -86,7 +87,7 @@ def details_of_matches():
 	request_details_of_match = requests.get(matches_url_detailed)
 	details_of_match_convert_json = json.loads(request_details_of_match.text)
 
-	print(details_of_match_convert_json["radiant_win"])
+	#print(details_of_match_convert_json["radiant_win"])
 	rhero_1 = details_of_match_convert_json["players"][0]["hero_id"]
 	rhero_2 = details_of_match_convert_json["players"][1]["hero_id"]
 	rhero_3 = details_of_match_convert_json["players"][2]["hero_id"]
@@ -106,4 +107,11 @@ def details_of_matches():
 		#write_data = f.write(str(z))
 
 details_of_matches()
-RAW_HEROES_IDS = "https://raw.githubusercontent.com/kronusme/dota2-api/master/data/heroes.json"
+
+RAW_HEROES_IDS = "https://raw.githubusercontent.com/UANEMESIS/main/master/dota_2/heroes.json"
+
+raw_get = requests.get(RAW_HEROES_IDS)
+r22 = json.loads(raw_get.text)
+
+print(r22["heroes"]["riki"])
+#print(raw_get.text)

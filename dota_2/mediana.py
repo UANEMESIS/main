@@ -139,18 +139,18 @@ def details_of_matches(m_id):
 	
 	if radiant_mediana > dire_mediana and WINNER == "Radiant":
 		MEDIANA_FOR_MATCH = "Success!"
-		RESULT = f"Winner: {WINNER} Percent(Radiant|Dire): {radiant_mediana} | {dire_mediana} Mediana: {MEDIANA_FOR_MATCH}"
+		RESULT = f"Winner: {WINNER} %(Radiant|Dire): {radiant_mediana} | {dire_mediana} Mediana: {MEDIANA_FOR_MATCH}"
 	elif radiant_mediana > dire_mediana and WINNER == "Dire":
 		OFFSET = round(radiant_mediana - dire_mediana, 3)
 		MEDIANA_FOR_MATCH = "Failed!"
-		RESULT = f"Winner: {WINNER} Percent(Radiant|Dire): {radiant_mediana} | {dire_mediana} Mediana: {MEDIANA_FOR_MATCH} OFFSET: {OFFSET}"
+		RESULT = f"Winner: {WINNER} %(Radiant|Dire): {radiant_mediana} | {dire_mediana} Mediana: {MEDIANA_FOR_MATCH} OFFSET: {OFFSET}"
 	elif radiant_mediana < dire_mediana and WINNER == "Radiant":
 		OFFSET = round(dire_mediana - radiant_mediana, 3)
 		MEDIANA_FOR_MATCH = "Failed!"
-		RESULT = f"Winner: {WINNER} Percent(Radiant|Dire): {radiant_mediana} | {dire_mediana} Mediana: {MEDIANA_FOR_MATCH} OFFSET: {OFFSET}"
+		RESULT = f"Winner: {WINNER} %(Radiant|Dire): {radiant_mediana} | {dire_mediana} Mediana: {MEDIANA_FOR_MATCH} OFFSET: {OFFSET}"
 	elif radiant_mediana < dire_mediana and WINNER == "Dire":
 		MEDIANA_FOR_MATCH = "Success!"
-		RESULT = f"Winner: {WINNER} Percent(Radiant|Dire): {radiant_mediana} | {dire_mediana} Mediana: {MEDIANA_FOR_MATCH}"
+		RESULT = f"Winner: {WINNER} %(Radiant|Dire): {radiant_mediana} | {dire_mediana} Mediana: {MEDIANA_FOR_MATCH}"
 	else:
 		RESULT = "UNKNOWN ERROR!!!"
 	print(RESULT)

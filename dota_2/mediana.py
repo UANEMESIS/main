@@ -141,11 +141,11 @@ def details_of_matches(m_id):
 		MEDIANA_FOR_MATCH = "Success!"
 		RESULT = f"Winner: {WINNER} Percent(Radiant|Dire): {radiant_mediana} | {dire_mediana} Mediana: {MEDIANA_FOR_MATCH}"
 	elif radiant_mediana > dire_mediana and WINNER == "Dire":
-		OFFSET = radiant_mediana - dire_mediana
+		OFFSET = round(radiant_mediana - dire_mediana, 3)
 		MEDIANA_FOR_MATCH = "Failed!"
 		RESULT = f"Winner: {WINNER} Percent(Radiant|Dire): {radiant_mediana} | {dire_mediana} Mediana: {MEDIANA_FOR_MATCH} OFFSET: {OFFSET}"
 	elif radiant_mediana < dire_mediana and WINNER == "Radiant":
-		OFFSET = dire_mediana - radiant_mediana
+		OFFSET = round(dire_mediana - radiant_mediana, 3)
 		MEDIANA_FOR_MATCH = "Failed!"
 		RESULT = f"Winner: {WINNER} Percent(Radiant|Dire): {radiant_mediana} | {dire_mediana} Mediana: {MEDIANA_FOR_MATCH} OFFSET: {OFFSET}"
 	elif radiant_mediana < dire_mediana and WINNER == "Dire":

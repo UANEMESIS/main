@@ -6,7 +6,7 @@ import json
 #from colorama import Fore, Back, Style
 
 #init()
-USER_ID = "125138801" # Идишка аккаунта
+USER_ID = "105248644" #"125138801" # Идишка аккаунта
 WIN_HERO_RATE = {} 
 MEDIANA_LIST_RESULT = []
 
@@ -153,7 +153,7 @@ def details_of_matches(m_id):
 		RESULT = f"Winner: {WINNER} %(Radiant|Dire): {radiant_mediana} | {dire_mediana} Mediana: {MEDIANA_FOR_MATCH}"
 	else:
 		RESULT = "UNKNOWN ERROR!!!"
-	print(RESULT)
+	print(RESULT) # Опционально
 	MEDIANA_LIST_RESULT.append(RESULT)
 
 
@@ -166,6 +166,4 @@ while counter < len(LAST_20_MATCHES):
 		details_of_matches(i)
 		counter +=1
 
-#print(LAST_20_MATCHES)
 
-print(MEDIANA_LIST_RESULT)

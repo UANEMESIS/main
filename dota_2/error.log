@@ -1,0 +1,17 @@
+Bot started!
+Asked: 1
+Polling is stopped.
+Task exception was never retrieved
+future: <Task finished coro=<Dispatcher.start_polling() done, defined at C:\Program Files (x86)\Python36\lib\site-packages\aiogram\dispatcher\__init__.py:202> exception=TelegramAPIError('Bad Gateway',)>
+Traceback (most recent call last):
+  File "C:\Program Files (x86)\Python36\lib\site-packages\aiogram\dispatcher\__init__.py", line 231, in start_polling
+    updates = await self.bot.get_updates(limit=limit, offset=offset, timeout=timeout)
+  File "C:\Program Files (x86)\Python36\lib\site-packages\aiogram\bot\bot.py", line 83, in get_updates
+    result = await self.request(api.Methods.GET_UPDATES, payload)
+  File "C:\Program Files (x86)\Python36\lib\site-packages\aiogram\bot\base.py", line 147, in request
+    proxy=self.proxy, proxy_auth=self.proxy_auth)
+  File "C:\Program Files (x86)\Python36\lib\site-packages\aiogram\bot\api.py", line 204, in request
+    return await _check_result(method, response)
+  File "C:\Program Files (x86)\Python36\lib\site-packages\aiogram\bot\api.py", line 128, in _check_result
+    raise exceptions.TelegramAPIError(description)
+aiogram.utils.exceptions.TelegramAPIError: Bad Gateway

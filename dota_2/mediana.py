@@ -6,7 +6,7 @@ import json
 #from colorama import Fore, Back, Style
 
 #init()
-USER_ID = "105248644" #"125138801" # Идишка аккаунта
+USER_ID = "300488588" #"105248644" #"125138801" # Идишка аккаунта # 125138801
 WIN_HERO_RATE = {} 
 MEDIANA_LIST_RESULT = []
 
@@ -25,10 +25,10 @@ def get_all_win_rates():
 	text_filter_2_2 = text_filter_2.replace("Anti-Mage", "AntiMage")
 	text_filter_2_3 = text_filter_2_2.replace("Nature'sProphet", "NaturesProphet")
 	text_filter_3 = re.findall("[a-zA-Z]+", text_filter_2_3)
-	top_30_heroes = text_filter_3[0:118]
+	top_30_heroes = text_filter_3[0:119]
 
 
-	hero_stats = re.split("[a-zA-Z]+", text_filter_2_3)[1:118]
+	hero_stats = re.split("[a-zA-Z]+", text_filter_2_3)[1:119]
 	hero_stats_only_percent = [per.split("%")[0] for per in hero_stats]
 
 	# Заполняем WIN_HERO_RATE в виде key (герой) value (винрейт героя)

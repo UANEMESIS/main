@@ -6,7 +6,7 @@ import json
 #from colorama import Fore, Back, Style
 
 #init()
-USER_ID = "300488588" #"105248644" #"125138801" # Идишка аккаунта # 125138801
+USER_ID = "105248644" #"105248644" #"125138801" # Идишка аккаунта # 125138801
 WIN_HERO_RATE = {} 
 MEDIANA_LIST_RESULT = []
 

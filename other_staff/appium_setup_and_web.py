@@ -49,6 +49,11 @@ SETTINGS FOR APPIUM INSPECTOR
 for app, you can up http server:
 python -m http.server 8000
 
+LOCATIONG THE ELEMENTS
+https://wiki.saucelabs.com/display/DOCS/Getting+Started+with+Appium+for+Mobile+Native+Application+Testing
+MobileBy.ACCESSIBILITY_ID
+MobileBy.ID
+OTHER https://github.com/appium/python-client/blob/master/appium/webdriver/webdriver.py
 """
 
 

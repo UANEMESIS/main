@@ -35,6 +35,20 @@ C:\Users\User\AppData\Local\Android\Sdk\platform-tools;%ANDROID_HOME%/platform-t
 HZ >> on phone > appium settings and Unloock > Thought that install in first appium launch !?
 
 selen-appium doc http://appium.io/docs/en/about-appium/api/
+
+
+SETTINGS FOR APPIUM INSPECTOR
+
+{
+  "deviceName": "MEIZU 16",
+  "platformName": "Android",
+  "platformVersion": "8.1.0",
+  "app": "http://localhost:8000/APK_Info_v1.2.11_apkpure.com.apk"
+}
+
+for app, you can up http server:
+python -m http.server 8000
+
 """
 
 

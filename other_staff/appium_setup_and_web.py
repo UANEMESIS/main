@@ -20,6 +20,8 @@ import time
 10 Launch Appium server and insert adress in webdriver >> driver = webdriver.Remote("http://localhost:4723/wd/hub", desired_caps)
 11 Try to launch script
 
+IMPORTANT! Make sure that your Chromedriver compatible with Chrome browser installed on phone . URL for solution: http://appium.io/docs/en/writing-running-appium/web/chromedriver/
+
 Data:
 ANDROID_HOME = C:\Users\User\AppData\Local\Android\Sdk\
 JAVA_HOME = C:\Program Files\Java\jdk-10.0.1\bin

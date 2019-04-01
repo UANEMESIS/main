@@ -63,6 +63,15 @@ C:\Users\NEMESIS>adb shell
 
 
 IMPORTANT POST: https://github.com/openatx/uiautomator2
+INSTRUCTION:
+cmd:python -m uiautomator2 init
+cmd:python -m weditor >>>web: http://localhost:17310
+
+check if connected:
+import uiautomator2 as u2
+
+d = u2.connect('adb devices:ID') # alias for u2.connect_usb('123456f')
+print(d.info)
 """
 
 

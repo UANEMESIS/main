@@ -60,6 +60,9 @@ ALSO IMPORTANT https://stackoverflow.com/questions/29136173/emulator-error-x86-e
 GET CURRENT ACTIVITY:
 C:\Users\NEMESIS>adb shell
 16:/ $ dumpsys window windows | grep -E 'mCurrentFocus|mFocused'
+
+
+IMPORTANT POST: https://github.com/openatx/uiautomator2
 """
 
 
